@@ -1,6 +1,8 @@
 import express from 'express';
 import cors from 'cors';
-import { createServer, Server as HttpServer } from 'http';
+import { createServer } from 'http';
+
+import usersRouter from "./users/routes.js"
 
 
 export class Server {
@@ -11,21 +13,20 @@ export class Server {
         this.app.use(express.urlencoded({
           extended: false
         }));
+        
+        this.app.use('/users', usersRouter);
 
         this.app.use(function (req, res, next) {
             res.send(404)
         });
 
-        this.app.get("/", (req, res) => {
-            res.status(200).json({message: "hello world !"})
-        })
           
         this.server = createServer(this.app);
     }
 
     start() {
-        this.server.listen("3000", async () => {
-            console.info(`Server is running on port 3000`);
+        this.server.listen(process.env.PORT, async () => {
+            console.info(`Server is running on port ${process.env.PORT}`);
         });
     }
 }
