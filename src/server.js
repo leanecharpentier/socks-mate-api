@@ -29,4 +29,8 @@ export class Server {
             console.info(`Server is running on port ${process.env.PORT}`);
         });
     }
+
+    getApp() {
+        return this.app
+    }
 }
