@@ -5,6 +5,7 @@ import bcrypt from "bcrypt"
 import { ObjectId } from "mongodb"
 import jwt from "jsonwebtoken"
 import { hashPassword } from "../tools/helpers.js"
+import { UserBuilder } from "../tools/tests/datas.js"
 
 export async function login(req, res) {
     const { username, password } = req.body;
@@ -103,4 +104,17 @@ export async function giveLike(req, res) {
         return res.status(500).json({ message: "Internal server error" })
     }
     return res.status(200).json({ message: "Like" })
+}
+
+export async function getDemo(req, res) {
+    const userBuilder = new UserBuilder()
+    const user = new User(userBuilder)
+    user.password = await hashPassword(user.password)
+    await user.save()
+
+    const tokenData = {
+        userId: user._id,
+    };
+    const token = jwt.sign(tokenData, process.env.SECRET_KEY);
+    return res.status(200).json({ token: token, userId: user._id })
 }

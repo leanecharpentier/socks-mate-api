@@ -4,6 +4,8 @@ import { UserBuilder } from "./tests/datas.js";
 import { User } from "../users/models.js";
 
 async function isAuthenticated (req, res, next) {
+    console.log("aaaaaaaaaaaaa");
+    
     let token = req.header('Authorization');
     token = token.replace('Bearer ', '');
     if (!token) {
