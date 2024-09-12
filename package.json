@@ -5,6 +5,7 @@
   "main": "src/index.js",
   "scripts": {
     "dev": "set ENV=dev && nodemon src/index.js",
+    "start": "node src/index.js",
     "build": "npx tsc",
     "test": "set ENV=test && mocha --file ./src/tools/tests/mochaSetup.js --recursive ./src/**/*.test.js --exit --timeout 1000"
   },

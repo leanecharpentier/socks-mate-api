@@ -13,7 +13,10 @@ export class Server {
         this.app.use(express.urlencoded({
           extended: false
         }));
-        
+
+        this.app.get('/', (req, res) => {
+            res.send('Hello World')
+        })
         this.app.use('/users', usersRouter);
 
         this.app.use(function (req, res, next) {
