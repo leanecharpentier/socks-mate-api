@@ -17,6 +17,10 @@ const userSchema = new Schema({
         type: Number,
         required: true
     },
+    urlImage: {
+        type: String,
+        required: false
+    },
     giveLikes: [{
         type: Schema.Types.ObjectId,
         ref: 'User',
